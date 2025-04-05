@@ -1,8 +1,8 @@
 <?php
 
-namespace Barryvdh\TranslationManager\Tests;
+namespace Cleargoal\TranslationManager\Tests;
 
-use Barryvdh\TranslationManager\Manager;
+use Cleargoal\TranslationManager\Manager;
 
 class ManagerTest extends TestCase
 {

@@ -1,14 +1,18 @@
-<?php namespace Barryvdh\TranslationManager;
+<?php
+
+declare(strict_types=1);
+
+namespace Cleargoal\TranslationManager;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
-use Barryvdh\TranslationManager\Models\Translation;
+use Cleargoal\TranslationManager\Models\Translation;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
 class Controller extends BaseController
 {
-    /** @var \Barryvdh\TranslationManager\Manager  */
+    /** @var \Cleargoal\TranslationManager\Manager  */
     protected $manager;
 
     public function __construct(Manager $manager)
@@ -47,7 +51,7 @@ class Controller extends BaseController
             ->with('group', $group)
             ->with('numTranslations', $numTranslations)
             ->with('numChanged', $numChanged)
-            ->with('editUrl', $group ? action('\Barryvdh\TranslationManager\Controller@postEdit', [$group]) : null)
+            ->with('editUrl', $group ? action('\Cleargoal\TranslationManager\Controller@postEdit', [$group]) : null)
             ->with('deleteEnabled', $this->manager->getConfig('delete_enabled'));
     }
 
@@ -144,7 +148,7 @@ class Controller extends BaseController
         $group = str_replace(".", '', $request->input('new-group'));
         if ($group)
         {
-            return redirect()->action('\Barryvdh\TranslationManager\Controller@getView',$group);
+            return redirect()->action('\Cleargoal\TranslationManager\Controller@getView',$group);
         }
         else
         {
@@ -190,7 +194,7 @@ class Controller extends BaseController
                     'name' => $newLocale . '|' . $base_string->key,
                 ]);
                 app()->call(
-                    'Barryvdh\TranslationManager\Controller@postEdit',
+                    'Cleargoal\TranslationManager\Controller@postEdit',
                     [
                         'group' => $group
                     ]

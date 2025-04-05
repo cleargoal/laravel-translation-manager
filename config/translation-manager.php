@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
 
     /*
@@ -47,6 +49,18 @@ return [
      *    )
      */
     'exclude_langs'  => [],
+
+    /**
+     * Only languages that you need for now
+     * @type array
+     */
+    'only_langs'     => [
+        'de',
+        'en',
+        'es',
+        'fr',
+        'uk',
+    ],
 
     /**
      * Export translations with keys output alphabetically.

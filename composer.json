@@ -1,5 +1,5 @@
 {
-  "name": "barryvdh/laravel-translation-manager",
+  "name": "cleargoal/laravel-translation-manager",
   "description": "Manage Laravel Translations",
   "keywords": [
     "laravel",
@@ -10,7 +10,7 @@
   "authors": [
     {
       "name": "Barry vd. Heuvel",
-      "email": "barryvdh@gmail.com"
+      "email": "cleargoal@gmail.com"
     }
   ],
   "require": {
@@ -27,12 +27,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Barryvdh\\TranslationManager\\": "src/"
+      "Cleargoal\\TranslationManager\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Barryvdh\\TranslationManager\\Tests\\": "tests/"
+      "Cleargoal\\TranslationManager\\Tests\\": "tests/"
     }
   },
   "extra": {
@@ -41,7 +41,7 @@
     },
     "laravel": {
       "providers": [
-        "Barryvdh\\TranslationManager\\ManagerServiceProvider"
+        "Cleargoal\\TranslationManager\\ManagerServiceProvider"
       ]
     }
   },

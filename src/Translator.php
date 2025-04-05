@@ -1,4 +1,8 @@
-<?php namespace Barryvdh\TranslationManager;
+<?php
+
+declare(strict_types=1);
+
+namespace Cleargoal\TranslationManager;
 
 use Illuminate\Translation\Translator as LaravelTranslator;
 use Illuminate\Events\Dispatcher;
@@ -11,9 +15,10 @@ class Translator extends LaravelTranslator {
     /**
      * Get the translation for the given key.
      *
-     * @param  string  $key
-     * @param  array   $replace
-     * @param  string  $locale
+     * @param string $key
+     * @param array $replace
+     * @param null $locale
+     * @param bool $fallback
      * @return string
      */
     public function get($key, array $replace = array(), $locale = null, $fallback = true)
@@ -25,7 +30,7 @@ class Translator extends LaravelTranslator {
 
             // Reget with fallback
             $result = parent::get($key, $replace, $locale, $fallback);
-            
+
         }
 
         return $result;

@@ -1,7 +1,11 @@
-<?php namespace Barryvdh\TranslationManager\Models;
+<?php
+
+declare(strict_types=1);
+
+namespace Cleargoal\TranslationManager\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Translation model
