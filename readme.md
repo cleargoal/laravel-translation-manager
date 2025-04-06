@@ -51,6 +51,7 @@ php artisan migrate
 ### *Before publish assets*:
 If you have previously installed original Barry's package you need to delete config 'translation-manager' and view at resources/views/vendor/translation-manager/index.php
 Otherwise these files will not changed by publish command. Unchanged state produces 500 error.
+
 -----------------------------------
 You need to publish the config file for this package. This will add the file `config/translation-manager.php`, where you can configure this package.
 
