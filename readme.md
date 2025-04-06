@@ -25,7 +25,7 @@ This way, translations can be saved in git history and no overhead is introduced
 If you have a lot of locales in the project working with them may be cumbersome.
 You may want to limit the amount of locales to work with them one time.
 
-For this purpose you need to fill/change the config array `only_langs` with only the locales you need at the current time.
+For this purpose you need to fill/change the config array `only_locales` with only the locales you need at the current time.
 To restore the package behavior, i.e. work with all locales, empty that array.
 
 All other features haven't been touched.
