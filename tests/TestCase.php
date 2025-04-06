@@ -1,8 +1,8 @@
 <?php
 
-namespace Barryvdh\TranslationManager\Tests;
+namespace Cleargoal\TranslationManager\Tests;
 
-use Barryvdh\TranslationManager\ManagerServiceProvider;
+use Cleargoal\TranslationManager\ManagerServiceProvider;
 
 abstract class TestCase extends \Orchestra\Testbench\TestCase
 {

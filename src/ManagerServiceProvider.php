@@ -1,4 +1,8 @@
-<?php namespace Barryvdh\TranslationManager;
+<?php
+
+declare(strict_types=1);
+
+namespace Cleargoal\TranslationManager;
 
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
@@ -24,7 +28,7 @@ class ManagerServiceProvider extends ServiceProvider {
         $this->publishes([$configPath => config_path('translation-manager.php')], 'config');
 
         $this->app->singleton('translation-manager', function ($app) {
-            $manager = $app->make('Barryvdh\TranslationManager\Manager');
+            $manager = $app->make('Cleargoal\TranslationManager\Manager');
             return $manager;
         });
 

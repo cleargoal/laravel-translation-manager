@@ -1,6 +1,8 @@
 <?php
 
-namespace Barryvdh\TranslationManager;
+declare(strict_types=1);
+
+namespace Cleargoal\TranslationManager;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
@@ -8,8 +10,8 @@ use Symfony\Component\Finder\Finder;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Contracts\Foundation\Application;
-use Barryvdh\TranslationManager\Models\Translation;
-use Barryvdh\TranslationManager\Events\TranslationsExportedEvent;
+use Cleargoal\TranslationManager\Models\Translation;
+use Cleargoal\TranslationManager\Events\TranslationsExportedEvent;
 
 class Manager
 {
@@ -24,11 +26,13 @@ class Manager
 
     protected $config;
 
-    protected $locales;
+    protected array $locales;
 
-    protected $ignoreLocales;
+    protected array $ignoreLocales;
 
     protected $ignoreFilePath;
+
+    protected array $onlyLocales;
 
     public function __construct(Application $app, Filesystem $files, Dispatcher $events)
     {
@@ -39,9 +43,10 @@ class Manager
         $this->ignoreFilePath = storage_path('.ignore_locales');
         $this->locales = [];
         $this->ignoreLocales = $this->getIgnoredLocales();
+        $this->onlyLocales = $app['config']['translation-manager']['only_locales'];
     }
 
-    protected function getIgnoredLocales()
+    protected function getIgnoredLocales(): array
     {
         if (! $this->files->exists($this->ignoreFilePath)) {
             return [];
@@ -51,7 +56,7 @@ class Manager
         return ($result && is_array($result)) ? $result : [];
     }
 
-    public function importTranslations($replace = false, $base = null, $import_group = false)
+    public function importTranslations($replace = false, $base = null, $import_group = false): int
     {
         $counter = 0;
         //allows for vendor lang files to be properly recorded through recursion.
@@ -128,7 +133,7 @@ class Manager
         return $counter;
     }
 
-    public function importTranslation($key, $value, $locale, $group, $replace = false)
+    public function importTranslation($key, $value, $locale, $group, $replace = false): bool
     {
 
         // process only string values
@@ -158,7 +163,7 @@ class Manager
         return true;
     }
 
-    public function findTranslations($path = null)
+    public function findTranslations($path = null): int
     {
         $path = $path ?: base_path();
         $groupKeys = [];
@@ -239,7 +244,7 @@ class Manager
         return count($groupKeys + $stringKeys);
     }
 
-    public function missingKey($namespace, $group, $key)
+    public function missingKey($namespace, $group, $key): void
     {
         if (! in_array($group, $this->config['exclude_groups'])) {
             Translation::firstOrCreate([
@@ -328,7 +333,7 @@ class Manager
         $this->events->dispatch(new TranslationsExportedEvent());
     }
 
-    public function exportAllTranslations()
+    public function exportAllTranslations(): void
     {
         $groups = Translation::whereNotNull('value')->selectDistinctGroup()->get('group');
 
@@ -343,7 +348,7 @@ class Manager
         $this->events->dispatch(new TranslationsExportedEvent());
     }
 
-    protected function makeTree($translations, $json = false)
+    protected function makeTree($translations, $json = false): array
     {
         $array = [];
         foreach ($translations as $translation) {
@@ -370,32 +375,38 @@ class Manager
         return $array;
     }
 
-    public function cleanTranslations()
+    public function cleanTranslations(): void
     {
         Translation::whereNull('value')->delete();
     }
 
-    public function truncateTranslations()
+    public function truncateTranslations(): void
     {
         Translation::truncate();
     }
 
     public function getLocales()
     {
-        if (empty($this->locales)) {
-            $locales = array_merge([config('app.locale')],
-                Translation::groupBy('locale')->pluck('locale')->toArray());
-            foreach ($this->files->directories($this->app->langPath()) as $localeDir) {
-                if (($name = $this->files->name($localeDir)) != 'vendor') {
-                    $locales[] = $name;
+        if (empty($this->onlyLocales)) {
+            if (empty($this->locales)) {
+                $locales = array_merge([config('app.locale')],
+                    Translation::groupBy('locale')->pluck('locale')->toArray());
+                foreach ($this->files->directories($this->app->langPath()) as $localeDir) {
+                    if (($name = $this->files->name($localeDir)) != 'vendor') {
+                        $locales[] = $name;
+                    }
                 }
-            }
 
-            $this->locales = array_unique($locales);
-            sort($this->locales);
+                $this->locales = array_unique($locales);
+                sort($this->locales);
+            }
+            $return = array_diff($this->locales, $this->ignoreLocales);
+        }
+        else {
+            $return = $this->onlyLocales;
         }
 
-        return array_diff($this->locales, $this->ignoreLocales);
+        return $return;
     }
 
     public function addLocale($locale)

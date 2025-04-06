@@ -1,4 +1,8 @@
-<?php namespace Barryvdh\TranslationManager;
+<?php
+
+declare(strict_types=1);
+
+namespace Cleargoal\TranslationManager;
 
 use Illuminate\Translation\TranslationServiceProvider as BaseTranslationServiceProvider;
 

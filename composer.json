@@ -1,5 +1,5 @@
 {
-  "name": "barryvdh/laravel-translation-manager",
+  "name": "cleargoal/laravel-translation-manager",
   "description": "Manage Laravel Translations",
   "keywords": [
     "laravel",
@@ -11,10 +11,14 @@
     {
       "name": "Barry vd. Heuvel",
       "email": "barryvdh@gmail.com"
+    },
+    {
+      "name": "Volodymyr Yefremov",
+      "email": "cleargoal01@gmail.com"
     }
   ],
   "require": {
-    "php": "^8.1",
+    "php": "^8.4",
     "illuminate/support": "^9|^10|^11|^12",
     "illuminate/translation": "^9|^10|^11|^12",
     "symfony/finder": "^6|^7"
@@ -23,16 +27,16 @@
     "orchestra/testbench": "^7|^8|^9|^10"
   },
   "suggest": {
-     "tanmuhittin/laravel-google-translate": "If you want to translate using Google API"
+     "tanmuhittin/laravel-google-translate": "If you want to translate using Google API. Remeber you need to tune your own settings at Google."
   },
   "autoload": {
     "psr-4": {
-      "Barryvdh\\TranslationManager\\": "src/"
+      "Cleargoal\\TranslationManager\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Barryvdh\\TranslationManager\\Tests\\": "tests/"
+      "Cleargoal\\TranslationManager\\Tests\\": "tests/"
     }
   },
   "extra": {
@@ -41,7 +45,7 @@
     },
     "laravel": {
       "providers": [
-        "Barryvdh\\TranslationManager\\ManagerServiceProvider"
+        "Cleargoal\\TranslationManager\\ManagerServiceProvider"
       ]
     }
   },

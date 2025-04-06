@@ -1,8 +1,8 @@
 <?php
 
-namespace Barryvdh\TranslationManager\Console;
+namespace Cleargoal\TranslationManager\Console;
 
-use Barryvdh\TranslationManager\Manager;
+use Cleargoal\TranslationManager\Manager;
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -22,7 +22,7 @@ class ImportCommand extends Command
      */
     protected $description = 'Import translations from the PHP sources';
 
-    /** @var \Barryvdh\TranslationManager\Manager */
+    /** @var \Cleargoal\TranslationManager\Manager */
     protected $manager;
 
     public function __construct(Manager $manager)

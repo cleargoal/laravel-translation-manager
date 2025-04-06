@@ -1,9 +1,11 @@
 ## Laravel Translation Manager
 
-[![Tests](https://github.com/barryvdh/laravel-translation-manager/actions/workflows/run-tests.yml/badge.svg)](https://github.com/barryvdh/laravel-translation-manager/actions)
-[![Packagist License](https://poser.pugx.org/barryvdh/laravel-translation-manager/license.png)](http://choosealicense.com/licenses/mit/)
-[![Latest Stable Version](https://poser.pugx.org/barryvdh/laravel-translation-manager/version.png)](https://packagist.org/packages/barryvdh/laravel-translation-manager)
-[![Total Downloads](https://poser.pugx.org/barryvdh/laravel-translation-manager/d/total.png)](https://packagist.org/packages/barryvdh/laravel-translation-manager)
+### *It's the fork with one change. Read below*
+
+[![Tests](https://github.com/cleargoal/laravel-translation-manager/actions/workflows/run-tests.yml/badge.svg)](https://github.com/cleargoal/laravel-translation-manager/actions)
+[![Packagist License](https://poser.pugx.org/cleargoal/laravel-translation-manager/license.png)](http://choosealicense.com/licenses/mit/)
+[![Latest Stable Version](https://poser.pugx.org/cleargoal/laravel-translation-manager/version.png)](https://packagist.org/packages/cleargoal/laravel-translation-manager)
+[![Total Downloads](https://poser.pugx.org/cleargoal/laravel-translation-manager/d/total.png)](https://packagist.org/packages/cleargoal/laravel-translation-manager)
 [![Fruitcake](https://img.shields.io/badge/Powered%20By-Fruitcake-b2bc35.svg)](https://fruitcake.nl/)
 
 This is a package to manage Laravel translation files.
@@ -18,32 +20,44 @@ The workflow would be:
 
 This way, translations can be saved in git history and no overhead is introduced in production.
 
+-----------------------------------------
+### *Difference in this fork*
+If you have a lot of locales in the project working with them may be cumbersome.
+You may want to limit the amount of locales to work with them one time.
+
+For this purpose you need to fill/change the config array `only_langs` with only the locales you need at the current time.
+To restore the package behavior, i.e. work with all locales, empty that array.
+
+All other features haven't been touched.
+
+------------------------------------------
+
 ![Screenshot](http://i.imgur.com/4th2krf.png)
 
 ## Installation
 
-Require this package in your composer.json and run composer update (or run `composer require barryvdh/laravel-translation-manager` directly):
+Require this package in your composer.json and run composer update (or run `composer require cleargoal/laravel-translation-manager` directly):
 
-    composer require barryvdh/laravel-translation-manager
+    composer require cleargoal/laravel-translation-manager
 
 
 You need to run the migrations for this package.
 
 ```
-php artisan vendor:publish --provider="Barryvdh\TranslationManager\ManagerServiceProvider" --tag=migrations
+php artisan vendor:publish --provider="Cleargoal\TranslationManager\ManagerServiceProvider" --tag=migrations
 php artisan migrate
 ```
 
 You need to publish the config file for this package. This will add the file `config/translation-manager.php`, where you can configure this package.
 
 ```
-php artisan vendor:publish --provider="Barryvdh\TranslationManager\ManagerServiceProvider" --tag=config
+php artisan vendor:publish --provider="Cleargoal\TranslationManager\ManagerServiceProvider" --tag=config
 ```
 
 In order to edit the default template, the views must be published as well. The views will then be placed in `resources/views/vendor/translation-manager`.
 
 ```
-php artisan vendor:publish --provider="Barryvdh\TranslationManager\ManagerServiceProvider" --tag=views
+php artisan vendor:publish --provider="Cleargoal\TranslationManager\ManagerServiceProvider" --tag=views
 ```
 
 Routes are added in the ServiceProvider. You can set the group parameters for the routes in the configuration.
@@ -159,7 +173,7 @@ To detect missing translations, we can swap the Laravel TranslationServiceProvid
 In your `config/app.php`, comment out the original TranslationServiceProvider and add the one from this package:
 
     //'Illuminate\Translation\TranslationServiceProvider',
-    'Barryvdh\TranslationManager\TranslationServiceProvider',
+    'Cleargoal\TranslationManager\TranslationServiceProvider',
 
 This will extend the Translator and will create a new database entry, whenever a key is not found, so you have to visit the pages that use them.
 This way it shows up in the webinterface and can be edited and later exported.
