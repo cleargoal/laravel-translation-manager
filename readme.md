@@ -38,7 +38,7 @@ All other features haven't been touched.
 
 Require this package in your composer.json and run composer update (or run `composer require cleargoal/laravel-translation-manager` directly):
 
-    composer require cleargoal/laravel-translation-manager
+    composer require cleargoal/laravel-translation-manager --dev
 
 
 You need to run the migrations for this package.
@@ -47,7 +47,11 @@ You need to run the migrations for this package.
 php artisan vendor:publish --provider="Cleargoal\TranslationManager\ManagerServiceProvider" --tag=migrations
 php artisan migrate
 ```
-
+-----------------------------------
+### *Before publish assets*:
+If you have previously installed original Barry's package you need to delete config 'translation-manager' and view at resources/views/vendor/translation-manager/index.php
+Otherwise these files will not changed by publish command. Unchanged state produces 500 error.
+-----------------------------------
 You need to publish the config file for this package. This will add the file `config/translation-manager.php`, where you can configure this package.
 
 ```
