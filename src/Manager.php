@@ -79,8 +79,7 @@ class Manager
             }
             $vendorName = $this->files->name($this->files->dirname($langPath));
             foreach ($this->files->allfiles($langPath) as $file) {
-                $info = pathinfo($file);
-                $group = $info['filename'];
+                $group = $file->getFilename();
                 if ($import_group) {
                     if ($import_group !== $group) {
                         continue;
@@ -90,7 +89,7 @@ class Manager
                 if (in_array($group, $this->config['exclude_groups'])) {
                     continue;
                 }
-                $subLangPath = str_replace($langPath.DIRECTORY_SEPARATOR, '', $info['dirname']);
+                $subLangPath = str_replace($langPath.DIRECTORY_SEPARATOR, '', $file->getPath());
                 $subLangPath = str_replace(DIRECTORY_SEPARATOR, '/', $subLangPath);
                 $langPath = str_replace(DIRECTORY_SEPARATOR, '/', $langPath);
 
@@ -115,13 +114,13 @@ class Manager
         }
 
         foreach ($this->files->files($this->app['path.lang']) as $jsonTranslationFile) {
-            if (strpos($jsonTranslationFile, '.json') === false) {
+            if ($jsonTranslationFile->getExtension() !== 'json') {
                 continue;
             }
-            $locale = basename($jsonTranslationFile, '.json');
+            pathinfo($jsonTranslationFile->getFilename(), PATHINFO_FILENAME);
             $group = self::JSON_GROUP;
             $translations =
-                \Lang::getLoader()->load($locale, '*', '*'); // Retrieves JSON entries of the given locale only
+                Lang::getLoader()->load($locale, '*', '*'); // Retrieves JSON entries of the given locale only
             if ($translations && is_array($translations)) {
                 foreach ($translations as $key => $value) {
                     $importedTranslation = $this->importTranslation($key, $value, $locale, $group, $replace);
