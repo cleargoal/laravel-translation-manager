@@ -54,7 +54,7 @@ return [
      * Only languages that you need for now
      * @type array
      */
-    'only_langs'     => [
+    'only_locales'     => [
         'de',
         'en',
         'es',
