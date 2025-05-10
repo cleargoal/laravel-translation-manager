@@ -10,6 +10,7 @@ use Symfony\Component\Finder\Finder;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Support\Facades\Lang;
 use Cleargoal\TranslationManager\Models\Translation;
 use Cleargoal\TranslationManager\Events\TranslationsExportedEvent;
 
