@@ -48,8 +48,8 @@ php artisan vendor:publish --provider="Cleargoal\TranslationManager\ManagerServi
 php artisan migrate
 ```
 -----------------------------------
-### *Before publish assets*:
-If you have previously installed original Barry's package you need to delete config 'translation-manager' and view at resources/views/vendor/translation-manager/index.php
+### <span style="color:red;" > *Before publish assets* </span>:
+If you have previously installed original Barry's package you need to delete 2 files, the config 'translation-manager' and view (blade) at resources/views/vendor/translation-manager/index.php
 Otherwise these files will not changed by publish command. Unchanged state produces 500 error.
 
 -----------------------------------
