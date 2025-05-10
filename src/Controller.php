@@ -22,6 +22,7 @@ class Controller extends BaseController
 
     public function getIndex($group = null)
     {
+        $needTrans = request()->query('needTrans', 'n');
         $locales = $this->manager->getLocales();
         $groups = Translation::groupBy('group');
         $excludedGroups = $this->manager->getConfig('exclude_groups');
@@ -41,7 +42,9 @@ class Controller extends BaseController
         $numTranslations = count($allTranslations);
         $translations = [];
         foreach($allTranslations as $translation){
-            $translations[$translation->key][$translation->locale] = $translation;
+            if($needTrans !== 'y' || empty($translation->value)) {
+                $translations[$translation->key][$translation->locale] = $translation;
+            }
         }
 
          return view('translation-manager::index')
