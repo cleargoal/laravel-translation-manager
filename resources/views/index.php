@@ -128,6 +128,7 @@
                     <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                     <button type="submit" class="btn btn-info" data-disable-with="Publishing..">Publish translations</button>
                     <a href="<?= action('\Cleargoal\TranslationManager\Controller@getIndex') ?>" class="btn btn-default">Back</a>
+                    <a href="?needTrans=y" class="btn btn-info">Show only keys needed translations</a>
                 </form>
             </div>
         <?php endif; ?>
