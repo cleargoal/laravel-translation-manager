@@ -118,7 +118,7 @@ class Manager
             if ($jsonTranslationFile->getExtension() !== 'json') {
                 continue;
             }
-            pathinfo($jsonTranslationFile->getFilename(), PATHINFO_FILENAME);
+            $locale = pathinfo($jsonTranslationFile->getFilename(), PATHINFO_FILENAME);
             $group = self::JSON_GROUP;
             $translations =
                 Lang::getLoader()->load($locale, '*', '*'); // Retrieves JSON entries of the given locale only
